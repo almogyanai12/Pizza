@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>פיצה בשכונה</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="shortcut icon" href="{% static 'images/thumbnail.png' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script type="text/javascript">
+      var user = '{{request.user}}'
+      function getToken(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+          const cookies = document.cookie.split(';');
+          for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+          }
+        }
+        return cookieValue;
+      }
+      const csrftoken = getToken('csrftoken');
+
+      function getCookie(name){
+        var cookieArr = document.cookie.split(";");
+
+        for (var i = 0; i < cookieArr.length; i++) {
+          var cookiePair = cookieArr[i].split("=");
+
+          if (name == cookiePair[0].trim()){
+            return decodeURIComponent(cookiePair[1]);
+          }
+        }
+        return null;
+      }
+
+       var cart = JSON.parse(getCookie('cart'));
+      if (cart == undefined){
+        cart = {}
+        console.log("Cart was created!")
+        document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/";
+      }
+      console.log('Cart:',cart);
+
+    </script>
+  </head>
+  <body>
+
+    <!--Top Page Phone Number-->
+    <div class="top-bar">
+      <div class="container">
+        <div class="col-12 text-right">
+          <p><a href="tel:+9720542697225">לחצו כאן או חייגו 054-269-7225</a></p>
+        </div>
+      </div>
+    </div>
+    <!--END Top Page Phone Number-->
+
+    <!--Navbar-->
+    <div class="navbar bg-light navbar-light navbar-expand-sm">
+      <div class="container">
+
+        <a href="{% url 'index' %}" class="navbar-brand"><img src="{% static 'images/logo.png' %}" alt="Logo" title="Logo"> </a>
+
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarResponsive">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item"><a href="#" class="nav-link">צור קשר</a> </li>
+            <li class="nav-item"><a href="#" class="nav-link">עלינו</a> </li>
+            <li class="nav-item"><a href="{% url 'store' %}" class="nav-link active">הזמנה חדשה</a> </li>
+          </ul>
+        </div>
+
+        <div class="form-inline my-2 my-lg-0">
+          <a href="{% url 'cart' %}">
+            <img src="{% static 'images/cart.png' %}" alt="Cart" id="cart-icon">
+          </a>
+          <p id=cart-total>{{cartItems}}</p>
+        </div>
+
+      </div>
+    </div>
+    <!--END Navbar-->
+
+    <div class="container">
+      <div class="jumbotron">
+        {% block body_block %}
+        {% endblock %}
+      </div>
+    </div>
+
+    <footer>
+      <div class="container">
+        <div class="row text-light text-center py-4 justify-content-center">
+          <div class="col-sm-10 col-md-8 col-lg-6">
+            <img src="{% static 'images/logo-bw.png' %}" alt="">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src='{% static 'js/jquery-3.4.1.slim.js' %}'></script>
+    <script src='{% static 'js/bootstrap.min.js' %}'></script>
+    <script type="text/javascript" src="{% static 'js/cart.js' %}">
+
+    </script>
+  </body>
+</html>

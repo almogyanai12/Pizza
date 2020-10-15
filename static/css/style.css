@@ -1,0 +1,206 @@
+/*-- Body Reset --*/
+body {
+  overflow-x: hidden;
+  font-family: 'Varela Round', sans-serif;
+  color: #616971;
+}
+
+/*============= TOP BAR HEADER =============*/
+.top-bar{
+  background: #C70039;
+  height: 2.8rem;
+  padding: .5em 0;
+}
+.top-bar a{
+  color: white;
+  text-decoration: none;
+  font-size: 1.1rem;
+}
+
+
+/*============= NAVIGATION =============*/
+
+.navbar-brand img{
+  height: 5rem
+}
+
+.navbar{
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: .1rem;
+  box-shadow: 0 .5rem .5rem rgba(0, 0, 0, .1);
+  z-index: 1;
+}
+
+.nav-item{
+  padding: .5rem;
+}
+
+.nav-link{
+  color: #5b5555!important;
+}
+
+.nav-link:hover{
+  color: #C70039!important;
+}
+
+
+
+/*-- Store --*/
+.box-element{
+  align-self: center;
+  box-shadow: hsl(0, 0%, 80%) 0 0 16px;
+  background-color: #fff;
+  border-radius: 4px;
+  padding: 10px;
+  margin-bottom: 10px;
+  height: auto;
+  text-decoration: none;
+  color: black;
+}
+
+.thumbnail{
+  height: 8rem;
+  align-self: right;
+  box-shadow: hsl(0, 0%, 80%) 0 0 16px;
+  background-color: #fff;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.product{
+  text-align: right;
+  margin-right: 14rem;
+}
+
+#cart-total{
+  display: block;
+  text-align: right;
+  color: #fff;
+  background-color: red;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  font-size: 12px;
+}
+/*============= FOOTER =============*/
+footer{
+  background-color: #383838;
+  padding: 1rem 2rem 3rem;
+}
+
+footer img{
+  height: 4rem;
+}
+
+/*============= Cart =============*/
+.cart-row{
+  display: flex;
+  align-items: flex-stretch;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ececec;
+
+}
+
+.quantity{
+  display: inline-block;
+  padding-right: 10px;
+}
+
+.plusminus{
+  height: 1.5rem;
+  margin-bottom: 6px
+}
+
+.row-image{
+  height: 6rem;
+  align-self: right;
+  box-shadow: hsl(0, 0%, 80%) 0 0 16px;
+  background-color: #fff;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+/*============= Checkout =============*/
+
+.form-field{
+  width: 250px;
+  display: inline-block;
+  padding: 5px;
+}
+
+.form-control{
+
+}
+
+.hidden{
+  display: none!important;
+}
+
+#form{}
+/*============= MEDIA QUERIES =============*/
+
+/* Devices under 1199px (xl) */
+@media (max-width: 1199.98px) {
+
+}
+/* Devices under 768px (md) */
+@media (max-width: 767.98px) {
+
+}
+
+
+/*============ BOOTSTRAP BREAK POINTS:
+
+Extra small (xs) devices (portrait phones, less than 576px)
+No media query since this is the default in Bootstrap
+
+Small (sm) devices (landscape phones, 576px and up)
+@media (min-width: 576px) { ... }
+
+Medium (md) devices (tablets, 768px and up)
+@media (min-width: 768px) { ... }
+
+Large (lg) devices (desktops, 992px and up)
+@media (min-width: 992px) { ... }
+
+Extra (xl) large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) { ... }
+
+=============*/
+
+/*-- Bootstrap Mobile Gutter Fix --*/
+.row, .container-fluid {
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+}
+
+/*-- Fixed Background Image --*/
+.fixed-background {
+  position: relative;
+  width: 100%;
+  z-index: 1000!important;
+}
+.fixed-wrap {
+  clip: rect(0, auto, auto, 0);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -999 !important;
+}
+.fixed {
+  z-index: -999!important;
+  display: block;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center center;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  will-change: transform;
+}

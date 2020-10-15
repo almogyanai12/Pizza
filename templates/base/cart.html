@@ -1,0 +1,50 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block body_block %}
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="box-element">
+      <a style="float: right;" class="btn btn-outline-dark" href="{% url 'store' %}">חזרה לתפריט&#x2192;</a>
+
+      <br><br>
+
+      <table class="table">
+        <tr>
+          <th>
+            <a class="btn btn-success" style="margin: 5px;" href="{% url 'checkout' %}">סיום הזמנה</a>
+          </th>
+          <th><h5>סך הכל: ₪{{order.get_cart_total}}</h5></th>
+          <th><h5>מוצרים: {{order.get_cart_items}}</h5></th>
+        </tr>
+      </table>
+
+    </div>
+    <br>
+    <div class="box-element">
+      <div align="right" dir="rtl" class="cart-row" style="font-weight:bold;">
+        <div style="flex:2"></div>
+        <div style="flex:2">מוצר</div>
+        <div style="flex:1">מחיר</div>
+        <div style="flex:1">כמות</div>
+        <div style="flex:1">סך הכל</div>
+      </div>
+
+      {% for item in items %}
+      <div align="right" dir="rtl" class="cart-row">
+        <div style="flex:2"><img src="{{item.product.imageURL}}" alt="פיצה" class="row-image"> </div>
+        <div style="flex:2">{{item.product.name}}</div>
+        <div style="flex:1">₪{{item.product.price|floatformat:1}}</div>
+        <div style="flex:1">
+          <img data-product={{item.product.id}} data-action='remove' class="plusminus update-cart" src="{% static 'images/-.png'%}" alt="">
+          <p class="quantity">{{item.quantity}}</p>
+          <img data-product={{item.product.id}} data-action='add' class="plusminus update-cart" src="{% static 'images/+.png'%}" alt="">
+        </div>
+        <div style="flex:1">₪{{item.get_total}}</div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}
