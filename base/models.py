@@ -1,10 +1,15 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User # watch out, always create a custom User model with
+# the following before first migrating the project
 
+class CustomUser(AbstractUser): # import this from django
+    # even if you have nothing change this and add in your settings model the following line:
+    # AUTH_USER_MODEL = 'base.CustomUser'
+    pass
 # Create your models here.
 
 class Customer(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE,null=True, blank=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE,null=True, blank=True) 
     name = models.CharField(max_length=200, null=True)
     email = models.CharField(max_length=200, null=True)
 
@@ -20,7 +25,7 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
-    @property
+    @property 
     def imageURL(self):
         try:
             url = self.image.url
@@ -38,15 +43,15 @@ class Order(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL,blank=True,null=True)
     date_ordered = models.DateTimeField(auto_now_add=True)
     complete = models.BooleanField(default=False, null=True, blank=True)
-    transaction_id = models.CharField(max_length=200, null=True)
+    transaction_id = models.CharField(max_length=200, null=True) # can be auto field - so you won't have to deal with this
     pizza = models.BooleanField(default=False)
 
     def __str__(self):
         return str(self.id)
 
-    @property
+    @property # no need for propery, better way: read about custom manager, https://www.youtube.com/watch?v=YGwSNkdwAEs&t=674s  -see all django con, amazing hacks there
     def get_cart_total(self):
-        orderitems = self.orderitem_set.all()
+        orderitems = self.orderitem_set.all() # where is the orederitem field, i'm confused, a set suggests a foreign key(?) ?
         total = sum([item.get_total for item in orderitems])
         return total
 
@@ -56,7 +61,7 @@ class Order(models.Model):
         total = sum([item.quantity for item in orderitems])
         return total
 
-class OrderItem(models.Model):
+class OrderItem(models.Model): # I don't understand why you need two order models, use one.
     product = models.ForeignKey(Product, on_delete=models.SET_NULL,blank=True,null=True)
     order = models.ForeignKey(Order, on_delete=models.SET_NULL,blank=True,null=True)
     quantity = models.IntegerField(default=0, null=True,blank=True)
@@ -70,7 +75,7 @@ class OrderItem(models.Model):
         return total
 
 class ShippingAddress(models.Model):
-    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL,blank=True,null=True)
+    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL,blank=True,null=True) # do you understand on_delete? , almost in any case you'll want models.CASCADE
     order = models.ForeignKey(Order, on_delete=models.SET_NULL,blank=True,null=True)
     city = models.CharField(max_length=200, null=True)
     address = models.CharField(max_length=200, null=True)
